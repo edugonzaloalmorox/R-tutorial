@@ -1,3 +1,4 @@
 # R tutorial
 
-This repository includes information about the _Introduction to R for PhD_ at Newcastle University Business School. 
+This repo includes information about the materials used in the seminar _Introduction to R for PhD_ at Newcastle University Business School. 
+
