@@ -1,0 +1,334 @@
+---
+title: "Introduction to R"
+author: "Newcaste University Business School"
+date: "4/11/2016"
+output:
+  slidy_presentation:
+    font_adjustment: 2
+    footer: Intro to R - Edu Gonzalo Almorox 4/11/2016
+  beamer_presentation: default
+subtitle: Edu Gonzalo Almorox
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Introduction... R in a nutshell 
+
+- What is [R](https://www.r-project.org)?   _programming language_, _environment_, _software_...
+
+    - Object programming 
+    - Open source and free
+    - Active community
+    - Important learning curve 
+    - Documentation far from perfect but getting into shape.
+      
+    
+- What is [RStudio](https://www.rstudio.com)? Integrated Development environment that makes R programming more user friendly. 
+
+- What can you do with R?
+
+    - Data analysis
+    - Data manipulation
+    - Data visualisation
+    - Dynamic documents 
+      - .... possibly more things that I don´t know
+
+
+
+## Let´s get our head around...
+
+**Step 1: Create a project**
+
+Project enable a better organizaation of the files and keeps a better control of the workflow (e.g. scripts, data, final documents, etc...). Projects also improve the efficiency. 
+
+- Generate a project 
+
+    - `Project - New Project - New Directory -  Empty project - (select directory...)`
+    - Create different folders containing different types (data, code, figures, documents...)   
+
+- _Optional_ (although highly recomended): Create a control version of the project 
+
+    - It enhances reproducibility and collaboration
+    - Keeps record and reduces errors 
+    - Limits software dependency
+    
+
+**Step 2: Resources**
+
+- In case of doubt there are different ways to proceed: 
+
+     + Specialised websites - e.g. [stackoverflow.com](http://stackoverflow.com/questions/tagged/r)
+     + [R Mailing lists](https://www.r-project.org/mail.html)
+     + `help`, `help.search()`, `??(name package/name function)`
+
+
+## Data structures 
+
+- In R every element is regarded as an object. Objects are data structures that group data according to specific attributes. Most general data structures are organised by two elements
+
+    - Dimensionality 
+    - Type of the contents (homogeneous, heterogeneous)
+    
+      1. **`numeric or character`**: single number of letter
+      
+      2. **`Vector`**: 1 dimension, homogeneous objects.
+      
+      3. **`List`**: 1 dimension, heterogenous objects - (different objects grouped together)
+      
+      3. **`Matrix`**: more than 1 dimension, homogenous objects 
+      
+      4. **`Data frame`**: more than 1 dimension, heterogenous objects. 
+      
+  
+
+## Data structures: examples 
+
+
+* This is a `vector`
+```{r, echo = FALSE, include = TRUE}
+
+v =c(1,2,3,4)
+v
+```
+
+* This is a `list`
+```{r, echo = FALSE, include = TRUE}
+
+l = list(c(1:5), c(1:2))
+l
+```
+
+This is a `data.frame`
+```{r, echo = FALSE, include = TRUE}
+df = data.frame(numbers = c(1,2), letters = c("a", "b") )
+df
+```
+
+* Data.frames are the most common data structure for gathering information.
+
+    - **Variables**: Collect different arguments associated with the information to be analysed - diffrent formats (numbers, strings, factors, dates, ...)
+    - **Observations**: Units of analysis (individuals, firms, etc...) - e.g. the rows of your dataset.
+    
+
+## Inputting information 
+
+-  There are two possible ways to input information: 
+
+    - a. **Manually**
+    - b. **Import from somewhere**
+
+- The majority of the analyses import data 
+
+    - Data are delivered in different formats
+    - Important to understand how information is structured 
+            
+**Step 1: Get started **
+
+- The first commands consist of the following instructions: 
+
+```{r, echo = TRUE, eval = FALSE}
+
+# working directory
+setwd("/Users/Personas/My Cloud/PhD _october_2016/teaching/R tutorial") 
+
+#install.packages() # for installing packages 
+#library("") # for loading libraries
+
+```
+
+**Step 2: Load your data** 
+
+* There are a number of packages and libraries that allow for this. Their use depends on the type of data that you want to load. The most typical functions are.
+
+       - `read.csv()` (`base`)
+       - `read.dta()` (`foreign`)
+       - `import()` (`rio`)
+       - `read_csv`, `read_xlsx`... (`readr`)
+       
+       
+## Load your data: `read.csv`
+
+Very used function for loading `.csv` files
+
+```{r, echo = TRUE, include = TRUE, message = FALSE, warning = FALSE}
+
+# load 'df'
+  df = read.csv("data_intro_r.csv", sep = ",", header = TRUE) 
+
+#get the first observations 
+  head(df)
+
+```
+
+
+## Load your data: `read.dta`
+
+Very used function for loading `.csv` files
+
+```{r, echo = TRUE, include = TRUE, message = FALSE, warning = FALSE}
+
+library(foreign)
+
+# load 'df'
+  df = read.csv("data_intro_r.csv", sep = ",", header = TRUE) 
+
+#get the first observations 
+  head(df)
+
+```
+
+
+## Load your data: `import()`
+
+It is more flexible than `read.csv` or  `read_dta` since it requires less arguments. 
+
+```{r, echo = TRUE, include = TRUE, message = FALSE, warning = FALSE}
+
+# load 'df'
+  library(rio)
+  df = import("data_intro_r.csv") 
+
+#get the first observations 
+  head(df)
+
+```
+
+- Package [rio](https://cran.r-project.org/web/packages/rio/index.html) can import data in several formats. 
+
+- These examples consider cases where **data are hosted locally** (e.g. in the computer). However, it is possible to get information directly from websites.
+
+    - Depending on the type of data the process can be more or less complex.
+
+
+## Export your data 
+
+How do we **save** our work after carrying out analysis? 
+
+* Two main options based on the former packages. 
+
+       1.  **`write.csv()`**
+       2.  **`export()`**
+
+```{r, echo = TRUE, include = TRUE, message = FALSE, warning = FALSE}
+
+# libraries 
+  library(rio)
+  library(dplyr)
+  
+# load df
+  df = import("data_intro_r.csv") 
+
+# do some analysis - e.x. subset data 
+  my_sub_data = df %>% select(location.id, date)  # select location and date 
+  
+# get the first observations - check it is the result we want.
+  head(my_sub_data)
+
+# save the output 
+  
+      # write csv version
+          write.csv(my_sub_data, "new_data.csv", row.names = FALSE)
+      # export version
+          export(my_sub_data, "new_data.csv")
+
+```
+    
+
+
+## Exploring the data 
+
+Once we have loaded the data, we can run some functions to check structure and characteristics of the `data.frame`
+
+- What do we mean by "exploring the data?"
+
+    - What type of variables do we have?
+    - How many (missing) observations?
+    - How many duplicates? 
+
+- **str()** allows to exlopre the structure of the `data.frame` and the type of variables are in it.
+
+```{r, echo = TRUE, include = TRUE, message = FALSE, warning = FALSE}
+
+
+str(df)
+
+```
+
+ - Also we can get **summaries** of the variables that composed that `data.frame`
+  
+```{r, echo = TRUE, include = TRUE, message = FALSE, warning = FALSE}
+
+
+summary(df)
+
+```
+
+## Types of data: factors and logical 
+
+There are different types of variables depending on the characteristics they represent.
+
+    
+- **factors**: They represent categories. They act as dummy variables and can be either numeric or strings (e.g. group of characters). `factor()` can convert a variable into a factor. `class()` can be used to check the type of variable. 
+
+
+```{r, echo = TRUE, include = TRUE}
+
+location_factor = factor(df$location.id)
+class(location_factor)
+```
+
+- **logical**: it can take just tow values `TRUE` or `FALSE`. Used for logical questions (e.g. is my variable a factor?)
+
+```{r, echo = TRUE, include = TRUE, message = TRUE}
+
+is.factor(df$location_factor)
+```
+
+- Are the first 5 observations of `jsa.fem()` 55?
+
+```{r, echo = TRUE, include = TRUE, message = TRUE}
+
+head(df$jsa.fem == 55)
+```
+
+## Data manipulation: old times 
+
+Normally we have to transform "_clean_" the raw information in order to meet other purposes. These transformations may entail adding (dropping) variables, adding (dropping) rows, select certain variables (rows)...
+
+- **Indexing(`$`)**: `mydata$myvariable`
+
+```{r, echo = TRUE, include = TRUE, message = TRUE}
+
+indexed_var = df$jsa.fem
+head(indexed_var)
+```
+
+- **Using []**: `mydata[nrow, ncolum]`
+
+```{r, echo = TRUE, include = TRUE, message = TRUE}
+
+# Get the 5 rows of 'region' and 'date'
+first_regions= df[1:5, c(2,3)]
+first_regions
+```
+
+- **Subset (`subset()`)**: `new.data = subset(old.data, cond_var1, condvar2)`
+
+
+
+```{r, echo = TRUE, include = TRUE, message = TRUE}
+
+# Select location jsa.fem equal to 40.
+
+jsa.40 = subset(df, jsa.fem == 40)
+head(jsa.40)
+```
+
+## Data manipulation now: _the "yr" family_
+
+"_Tidy datasets provide a standarized way to link the structure of a dataset (its physical layout) with its semantics (its meaning)_" (Hadley Wickham^[Wickham, Hadley (2014) "Tidy data". _Journal of Statistical Software Volume VV Issue II_])
+
+- 
+
