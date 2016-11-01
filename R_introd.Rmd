@@ -6,7 +6,9 @@ output:
   slidy_presentation:
     font_adjustment: 2
     footer: Intro to R - Edu Gonzalo Almorox 4/11/2016
-  beamer_presentation: default
+    fig_width: 10
+    fig_height: 8
+    fig_caption: true
 subtitle: Edu Gonzalo Almorox
 ---
 
@@ -35,6 +37,13 @@ knitr::opts_chunk$set(echo = FALSE)
     - Dynamic documents 
       - .... possibly more things that I don´t know
 
+## Data exploration 
+
+- Steps in a data analysis project 
+
+
+
+![_Source: R for Data Science (Wickham and Grolemund (2016))_](http://r4ds.had.co.nz/diagrams/data-science.png)
 
 
 ## Let´s get our head around...
@@ -165,7 +174,7 @@ Very used function for loading `.csv` files
 
 ## Load your data: `read.dta`
 
-Very used function for loading `.csv` files
+There are other packages that allow to import information in other formats. 
 
 ```{r, echo = TRUE, include = TRUE, message = FALSE, warning = FALSE}
 
@@ -246,8 +255,9 @@ Once we have loaded the data, we can run some functions to check structure and c
     - What type of variables do we have?
     - How many (missing) observations?
     - How many duplicates? 
+    - ....
 
-- **str()** allows to exlopre the structure of the `data.frame` and the type of variables are in it.
+- `str() allows to exlopre the structure of the `data.frame` and the type of variables are in it.
 
 ```{r, echo = TRUE, include = TRUE, message = FALSE, warning = FALSE}
 
@@ -330,5 +340,347 @@ head(jsa.40)
 
 "_Tidy datasets provide a standarized way to link the structure of a dataset (its physical layout) with its semantics (its meaning)_" (Hadley Wickham^[Wickham, Hadley (2014) "Tidy data". _Journal of Statistical Software Volume VV Issue II_])
 
-- 
+- When working wih data there are several things to have in mind 
+
+    - What do you want to do with the data?
+    - What tasks do I need for obtaining my purposes?
+    - How I execute them in a program?
+
+- `...yr()` packages are helpful resources to address these questions. They include:
+
+    - **`dplyr()`**
+    - **`tidyr()`**
+   
+
+## `dplyr()`
+
+- It is based on the _split - apply - combine_ concept so you can carry out various operations quite efficiently. 
+
+- It includes several useful functions: 
+
+    - `select()` and `slice()`: cast some variables
+    - `filter()`: filter certain rows 
+    - `arrange()`: sort variables
+    - `summarise()`: get summaries according to certain conditions
+    - `mutate()`: add variables 
+    - `distinct()`: get unique variables
+    - `group_by()`: grouped operations
+
+- Dplyr enables **pipes (%>%)** - very useful when there are multiple operations.
+
+ **Example 1**: _Select those regions and dates where job seekers allowance is 40_
+
+```{r, echo = TRUE, include = TRUE, message = TRUE}
+
+# Example
+
+jsa.40 = subset(df, jsa.fem == 40) # step 1 - filter rows
+
+final_jsa = jsa.40[, c(2,3)] # step 2 - select variables of interest 
+
+head(final_jsa, 7) # show results 
+  
+```
+
+**Example 1 bis - Introducing the syntax of dplyr throughout pipes** 
+    
+     
+```{r, echo = TRUE, include = TRUE, message = TRUE}
+
+# Example with dplyr and pipes 
+
+library(dplyr)
+final_jsa_piped = df %>% filter(jsa.fem == 40) %>%  select(location.region, date)
+
+head(final_jsa_piped,7)
+
+
+  
+```
+    
+    
+
+## `dplyr()` in detail
+
+**Example 2 - Multiple operations**: _Select those firms that are based in the North East, that have a date and where the job seekers allowance is below the average._
+
+```{r, echo = TRUE, include = TRUE, message = TRUE}
+
+# Example 2
+
+library(dplyr)
+example2= df %>% filter(jsa.fem < mean(jsa.fem), !is.na(date), location.region == "North East") %>% 
+     select(location.id)
+
+head(example2, 5)
+
+```
+
+`!is.na()` is a logical operator. There are other useful ones to consider
+
+```{r, eval = FALSE, echo = TRUE}
+<   Less than                    !=      Not equal to
+>   Greater than                 %in%    Group membership
+==  Equal to                     is.na   is NA
+<=  Less than or equal to        !is.na  is not NA
+>=  Greater than or equal to     &,|,!   Boolean operators
+
+```
+
+**Example 3 - Add variables**: _Create a variable that represents the mean the minimum and the maximum proportion of job seekers in the country. Sort observations in a descending order of number of job seekers._
+
+```{r, echo = TRUE, include = TRUE, message = TRUE}
+
+# Example 3 
+example3= df %>% mutate(jsa_mean = mean(jsa.fem), 
+                        jsa_min = min(jsa.fem),
+                        jsa_max = max(jsa.fem)) %>%  arrange(desc(jsa.fem))
+                                             
+
+head(example3, 5)
+
+```
+
+**Example 4 - Grouped operations**: _Create a variable that represents the mean the minimum and the maximum proportion of job seekers of each region._
+
+
+```{r, echo = TRUE, include = TRUE, message = TRUE}
+
+# Example 4
+example4= df %>% group_by(location.region) %>%
+  mutate(jsa_mean = mean(jsa.fem), 
+                        jsa_min = min(jsa.fem),
+                        jsa_max = max(jsa.fem))
+
+head(example4, 5)
+
+```
+
+
+**Example 5 - Get unique observations**: _Obtain a single observation of each firm and remove dates_
+
+
+```{r, echo = TRUE, include = TRUE, message = TRUE}
+
+# Example 5
+example5= df  %>% distinct(location.id, .keep_all =TRUE) %>% select(-date)
+
+head(example5, 5)
+
+```
+
+**Example 6 - Rename variables**: _Rename "location.id" and "location.region" by "firm" and "region"_
+
+
+```{r, echo = TRUE, include = TRUE, message = TRUE}
+
+# Example 6
+example6= df  %>% dplyr:: rename(firm = location.id, region = location.region)
+
+head(example6, 5)
+
+```
+
+## `tidyr`
+
+- This package is very useful when you want to change "reshape" the structure of your dataset.
+
+      - `gather()`: from wide to long.
+      - `spread()`: fromo long to wide.
+
+It is important to consider three elements: data object, key variable and value. 
+
+- **Example 7 - Transform the structure of the dataset**: From wide to long using `credits.csv` data.
+
+```{r, echo = TRUE, include = TRUE, message = TRUE}
+
+# Example 7
+
+library(rio)
+library(tidyr)
+
+credits = import("credits.csv")
+
+example7 = gather(credits, date, people_credits, FEB10:FEB16, factor_key = TRUE) %>% arrange(OA)
+
+head(example7, 5)
+
+```
+
+- **Example 7 bis - Transform the structure of the dataset**: From long to wide
+
+```{r, echo = TRUE, include = TRUE, message = TRUE}
+
+# Example 7 -bis
+
+library(rio)
+library(tidyr)
+
+credits = import("credits.csv")
+
+example7.1 = spread(example7, date, people_credits) %>% arrange(OA)
+
+head(example7.1, 5)
+
+```
+
+## Graphics: `ggplot2`
+
+- Most of the visualisation tools in R rely to more or less extent on `ggplot2`. `ggplot2` is based on the grammar of graphics, a system for describing and building the graphs.
+
+- When illustrating data you need to determine the purpose of your plots:
+
+    - Exploration
+    - Communication
+
+- We consider `df` as the data frame. 
+
+**Example 8**: _Represent a  histogram of the job seekers allowance._ 
+```{r, echo = TRUE, include = TRUE, message = FALSE}
+
+# Example 8 
+
+library(ggplot2)
+
+example8 = ggplot(df) + 
+  geom_histogram(mapping = aes(jsa.fem))
+example8
+
+```
+
+**Example 9**: _Represent the number of job seekers per region._ 
+```{r, echo = TRUE, include = TRUE, message = FALSE}
+
+# Example 9 
+
+# option A
+library(ggplot2)
+
+df$location.region = as.factor(df$location.region)
+
+example9.a = ggplot(df) + 
+  geom_histogram(mapping = aes(x= jsa.fem, fill = location.region))
+example9.a
+
+
+# option B
+example9.b = ggplot(df) + 
+  geom_histogram(mapping = aes(x= jsa.fem, fill = location.region), position = "dodge")
+example9.b
+
+#option C 
+
+example9.c = ggplot(df) + 
+  geom_histogram(mapping = aes(x= jsa.fem)) + facet_grid(. ~ location.region, scales = "free", space = "free")
+example9.c
+
+```
+
+
+## Dynamic documents: R Markdown
+
+- **R Markdown**: Unified framework that combines code, results and prose. 
+- Why integrating code, results and prose?
+
+      - Communication
+      - Collaboration
+      - New environment and way of working with data
+
+
+```{r, eval = FALSE, echo = TRUE}
+
+---
+title: "Introduction to R"
+date: "4/11/2016"
+output: html_document
+---
+  {r, echo = TRUE, include = TRUE, message = FALSE}
+
+# Example 9 
+
+# option A
+library(ggplot2)
+
+df$location.region = as.factor(df$location.region)
+
+example9.a = ggplot(df) + 
+  geom_histogram(mapping = aes(x= jsa.fem, fill = location.region))
+example9.a
+    
+    
+  This is an example of markdown that uses ggplot and blahblah blah. 
+  
+```
+
+- There are three important issues to consider
+
+    - **YAML** header that is surronded by `---
+    - **Chunks** is where the R code is allocated 
+    - Text is structured by `# headings`
+    
+- Results can be delivered in different formats: pdf (latex), html (for website documents) or word. 
+
+- `rmarkdown()` and `knitr()`
+
+## Example of Rmarkdown: present results from a model 
+
+- We need `stargazer()` for translating the results of a model into a table.
+
+- Using `data_model`
+
+**Step 1**: Run the regressions `lm` 
+
+```{r, echo = TRUE, include = TRUE, message = FALSE, results = 'asis'}
+
+data_model = read.csv("https://vincentarelbundock.github.io/Rdatasets/csv/datasets/mtcars.csv")
+
+      mod1 <- lm(mpg ~  cyl+ hp, data=data_model)
+      
+      mod2 <- lm(mpg ~ cyl+ hp + drat, data=data_model)
+      
+      mod3 <- lm(mpg ~ + cyl+ hp+ wt+ qsec + carb, data=data_model)
+```   
+
+
+**Step 2**: Present the table with results
+```{r, results = 'asis', message = FALSE, echo = TRUE}
+
+library(stargazer)
+      
+      # Results of model comparison
+      stargazer(mod1, mod2, mod3, header=FALSE, type='html')
+
+```
+
+
+**Step 2 bis**: Edit the table of results 
+
+```{r, results = 'asis', message = FALSE, echo = TRUE}
+
+library(stargazer)
+      
+      # Results of model comparison
+      stargazer(mod1, mod2, mod3, header=FALSE, type='html',
+                title  = "Regression: Nobel price results", 
+                column.labels = c("mod1", "mod2", "mod3"))
+
+```
+
+
+### Final notes 
+
+- R is a good alternative if you are thinking about carrying out projects that entail a decent amount of data analysis.
+
+- There are more advanced topics 
+
+                - Spatial analysis
+                - Dynamic plots 
+                - Text mining
+                - Network analysis
+
+- There are plenty of resources - things are getting incredibly better and really fast.
+
+        
+
+
 
