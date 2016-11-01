@@ -121,9 +121,9 @@ df
 
 -  There are two possible ways to input information: 
 
-     i. **Manually**
+     - **Manually**
      
-     ii. **Import from somewhere**
+     - **Import from somewhere**
 
 - The majority of the analyses import data 
 
