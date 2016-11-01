@@ -662,21 +662,22 @@ library(stargazer)
       # Results of model comparison
       stargazer(mod1, mod2, mod3, header=FALSE, type='html',
                 title  = "Regression: Nobel price results", 
-                column.labels = c("mod1", "mod2", "mod3"))
+                column.labels = c("mod1", "mod2", "mod3"),
+                notes.label = "We have done this fancy IV method")
 
 ```
 
 
-### Final notes 
+## Final notes 
 
 - R is a good alternative if you are thinking about carrying out projects that entail a decent amount of data analysis.
 
 - There are more advanced topics 
 
-                - Spatial analysis
-                - Dynamic plots 
-                - Text mining
-                - Network analysis
+    - Spatial analysis
+    - Dynamic plots 
+    - Text mining
+    - Network analysis
 
 - There are plenty of resources - things are getting incredibly better and really fast.
 
