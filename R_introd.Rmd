@@ -46,7 +46,7 @@ subtitle: Edu Gonzalo Almorox
 
 **Step 1: Create a project**
 
-Project enable a better organizaation of the files and keeps a better control of the workflow (e.g. scripts, data, final documents, etc...). Projects also improve the efficiency. 
+Project enable a better organization of the files and keeps a better control of the workflow (e.g. scripts, data, final documents, etc...). Projects also improve the efficiency. 
 
 - Generate a project 
 
