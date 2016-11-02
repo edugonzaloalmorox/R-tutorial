@@ -617,11 +617,11 @@ example9.a
     
 - Results can be delivered in different formats: pdf (latex), html (for website documents) or word. 
 
-- [`rmarkdown`]((http://rmarkdown.rstudio.com)) and [`knitr`]((http://yihui.name/knitr/))
+- [rmarkdown](http://rmarkdown.rstudio.com) and [knitr](http://yihui.name/knitr/)
 
 ## Example of Rmarkdown: present results from a model 
 
-- We need [`stargazer`]((https://cran.r-project.org/web/packages/stargazer/stargazer.pdf)) for translating the results of a model into a table.
+- We need [`stargazer`](https://cran.r-project.org/web/packages/stargazer/stargazer.pdf) for translating the results of a model into a table.
 
 - Using `data_model`
 
