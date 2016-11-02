@@ -130,7 +130,7 @@ df
     - Data are delivered in different formats
     - Important to understand how information is structured 
             
-**Step 1: Get started **
+**Step 1: Get started**
 
 - The first commands consist of the following instructions: 
 
@@ -345,8 +345,8 @@ head(jsa.40)
 
 - `...yr()` packages are helpful resources to address these questions. They include:
 
-    - **`dplyr()`**
-    - **`tidyr()`**
+    - **[`dplyr()`](https://cran.r-project.org/web/packages/dplyr/dplyr.pdf)**
+    - **[`tidyr()`](https://cran.r-project.org/web/packages/tidyr/tidyr.pdf)**
    
 
 ## `dplyr()`
@@ -523,7 +523,7 @@ head(example7.1, 5)
 
 ## Graphics: `ggplot2`
 
-- Most of the visualisation tools in R rely to more or less extent on `ggplot2`. `ggplot2` is based on the grammar of graphics, a system for describing and building the graphs.
+- Most of the visualisation tools in R rely to more or less extent on [`ggplot2`](http://ggplot2.org). `ggplot2` is based on the grammar of graphics, a system for describing and building the graphs.
 
 - When illustrating data you need to determine the purpose of your plots:
 
@@ -617,11 +617,11 @@ example9.a
     
 - Results can be delivered in different formats: pdf (latex), html (for website documents) or word. 
 
-- `rmarkdown()` and `knitr()`
+- [`rmarkdown`]((http://rmarkdown.rstudio.com)) and [`knitr`]((http://yihui.name/knitr/))
 
 ## Example of Rmarkdown: present results from a model 
 
-- We need `stargazer()` for translating the results of a model into a table.
+- We need [`stargazer`]((https://cran.r-project.org/web/packages/stargazer/stargazer.pdf)) for translating the results of a model into a table.
 
 - Using `data_model`
 
