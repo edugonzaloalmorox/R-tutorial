@@ -9,6 +9,8 @@ output:
     fig_width: 10
     fig_height: 8
     fig_caption: true
+    toc: true
+    theme: united
 subtitle: Edu Gonzalo Almorox
 ---
 
