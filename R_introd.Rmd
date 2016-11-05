@@ -54,7 +54,9 @@ Source: "The popularity of Data Analysis software (Muenchen (2016) "(www.r4stats
 
 
 
-![_Source: R for Data Science (Wickham and Grolemund (2016))_](http://r4ds.had.co.nz/diagrams/data-science.png)
+![](http://r4ds.had.co.nz/diagrams/data-science.png)
+
+Source: _R for Data Science_ (Wickham and Grolemund (2016))
 
 
 ## Let´s get our head around...
