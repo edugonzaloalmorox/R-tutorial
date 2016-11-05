@@ -1,5 +1,5 @@
 ---
-title: "Introduction to R"
+title: "Data management through R"
 author: "Newcaste University Business School"
 date: "4/11/2016"
 output:
@@ -9,8 +9,6 @@ output:
     fig_width: 10
     fig_height: 8
     fig_caption: true
-    toc: true
-    theme: united
 subtitle: Edu Gonzalo Almorox
 ---
 
@@ -20,12 +18,12 @@ subtitle: Edu Gonzalo Almorox
 
     - Object programming 
     - Open source and free
-    - Active community
+    - Compatibility with other languages i.e., Phyton, Javascript
     - Important learning curve 
     - Documentation far from perfect but getting into shape.
       
     
-- What is [RStudio](https://www.rstudio.com)? Integrated Development environment that makes R programming more user friendly. 
+- What is [RStudio](https://www.rstudio.com)? Integrated Development Environment that makes R programming more user friendly. 
 
 - What can you do with R?
 
@@ -33,9 +31,24 @@ subtitle: Edu Gonzalo Almorox
     - Data manipulation
     - Data visualisation
     - Dynamic documents 
+    - Techniques 
       - .... possibly more things that I don´t know
 
-## Data exploration 
+## Is R a good investment?
+
+
+
+![_Scholarly articles in Google Scholar_](http://i0.wp.com/r4stats.com/wp-content/uploads/2012/04/Fig_2d_ScholarlyImpact.png)
+
+![_Scholary articles in Google Scholar with no SPSS and SAS_](http://i0.wp.com/r4stats.com/wp-content/uploads/2012/04/Fig_2e_ScholarlyImpactSubset.png)
+
+![_Analytic Jobs_](http://i0.wp.com/datasciencepopularity.com/wp-content/uploads/2014/03/fig_1a_indeedjobs2014ge2501.png)
+
+Source: "The popularity of Data Analysis software (Muenchen (2016) "(www.r4stats.com)
+
+
+
+## How do we structure a data analysis project?
 
 - Steps in a data analysis project 
 
@@ -48,7 +61,7 @@ subtitle: Edu Gonzalo Almorox
 
 **Step 1: Create a project**
 
-Project enable a better organization of the files and keeps a better control of the workflow (e.g. scripts, data, final documents, etc...). Projects also improve the efficiency. 
+Project enable a better organizaation of the files and keeps a better control of the workflow (e.g. scripts, data, final documents, etc...). Projects also improve the efficiency. 
 
 - Generate a project 
 
@@ -132,7 +145,7 @@ df
     - Data are delivered in different formats
     - Important to understand how information is structured 
             
-**Step 1: Get started**
+**Step 1: Get started **
 
 - The first commands consist of the following instructions: 
 
@@ -347,8 +360,8 @@ head(jsa.40)
 
 - `...yr()` packages are helpful resources to address these questions. They include:
 
-    - **[`dplyr()`](https://cran.r-project.org/web/packages/dplyr/dplyr.pdf)**
-    - **[`tidyr()`](https://cran.r-project.org/web/packages/tidyr/tidyr.pdf)**
+    - **`dplyr()`**
+    - **`tidyr()`**
    
 
 ## `dplyr()`
@@ -525,7 +538,7 @@ head(example7.1, 5)
 
 ## Graphics: `ggplot2`
 
-- Most of the visualisation tools in R rely to more or less extent on [`ggplot2`](http://ggplot2.org). `ggplot2` is based on the grammar of graphics, a system for describing and building the graphs.
+- Most of the visualisation tools in R rely to more or less extent on `ggplot2`. `ggplot2` is based on the grammar of graphics, a system for describing and building the graphs.
 
 - When illustrating data you need to determine the purpose of your plots:
 
@@ -619,11 +632,11 @@ example9.a
     
 - Results can be delivered in different formats: pdf (latex), html (for website documents) or word. 
 
-- [rmarkdown](http://rmarkdown.rstudio.com) and [knitr](http://yihui.name/knitr/)
+- `rmarkdown()` and `knitr()`
 
 ## Example of Rmarkdown: present results from a model 
 
-- We need [`stargazer`](https://cran.r-project.org/web/packages/stargazer/stargazer.pdf) for translating the results of a model into a table.
+- We need `stargazer()` for translating the results of a model into a table.
 
 - Using `data_model`
 
