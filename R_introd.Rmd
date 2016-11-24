@@ -147,7 +147,7 @@ df
     - Data are delivered in different formats
     - Important to understand how information is structured 
             
-**Step 1: Get started **
+**Step 1: Get started**
 
 - The first commands consist of the following instructions: 
 
@@ -161,7 +161,7 @@ setwd("/Users/Personas/My Cloud/PhD _october_2016/teaching/R tutorial")
 
 ```
 
-**Step 2: Load your data** 
+**Step 2: Load your data**
 
 * There are a number of packages and libraries that allow for this. Their use depends on the type of data that you want to load. The most typical functions are.
 
