@@ -12,7 +12,7 @@ output:
 subtitle: Edu Gonzalo Almorox
 ---
 
-## Introduction... R in a nutshell 
+## 1. Introduction... R in a nutshell 
 
 - What is [R](https://www.r-project.org)?   _programming language_, _environment_, _software_...
 
@@ -34,7 +34,7 @@ subtitle: Edu Gonzalo Almorox
     - Techniques 
       - .... possibly more things that I don´t know
 
-## Is R a good investment?
+## 2. Is R a good investment?
 
 
 
@@ -48,7 +48,7 @@ Source: "The popularity of Data Analysis software (Muenchen (2016) "(www.r4stats
 
 
 
-## How do we structure a data analysis project?
+## 3. How do we structure a data analysis project?
 
 - Steps in a data analysis project 
 
@@ -59,7 +59,7 @@ Source: "The popularity of Data Analysis software (Muenchen (2016) "(www.r4stats
 Source: _R for Data Science_ (Wickham and Grolemund (2016))
 
 
-## Let´s get our head around...
+## 4. Let´s get our head around...
 
 **Step 1: Create a project**
 
@@ -86,7 +86,7 @@ Project enable a better organizaation of the files and keeps a better control of
      + `help`, `help.search()`, `??(name package/name function)`
 
 
-## Data structures 
+## 5. Data structures 
 
 - In R every element is regarded as an object. Objects are data structures that group data according to specific attributes. Most general data structures are organised by two elements
 
@@ -105,7 +105,7 @@ Project enable a better organizaation of the files and keeps a better control of
       
   
 
-## Data structures: examples 
+## 6. Data structures: examples 
 
 
 * This is a `vector`
@@ -134,7 +134,7 @@ df
     - **Observations**: Units of analysis (individuals, firms, etc...) - e.g. the rows of your dataset.
     
 
-## Inputting information 
+## 7. Inputting information 
 
 -  There are two possible ways to input information: 
 
@@ -171,7 +171,7 @@ setwd("/Users/Personas/My Cloud/PhD _october_2016/teaching/R tutorial")
        - `read_csv`, `read_xlsx`... (`readr`)
        
        
-## Load your data: `read.csv`
+## 8. Load your data: `read.csv`
 
 Very used function for loading `.csv` files
 
@@ -186,7 +186,7 @@ Very used function for loading `.csv` files
 ```
 
 
-## Load your data: `read.dta`
+## 9. Load your data: `read.dta`
 
 There are other packages that allow to import information in other formats. 
 
@@ -203,7 +203,7 @@ library(foreign)
 ```
 
 
-## Load your data: `import()`
+## 10. Load your data: `import()`
 
 It is more flexible than `read.csv` or  `read_dta` since it requires less arguments. 
 
@@ -225,7 +225,7 @@ It is more flexible than `read.csv` or  `read_dta` since it requires less argume
     - Depending on the type of data the process can be more or less complex.
 
 
-## Export your data 
+## 11. Export your data 
 
 How do we **save** our work after carrying out analysis? 
 
@@ -260,7 +260,7 @@ How do we **save** our work after carrying out analysis?
     
 
 
-## Exploring the data 
+## 12. Exploring the data 
 
 Once we have loaded the data, we can run some functions to check structure and characteristics of the `data.frame`
 
@@ -289,7 +289,7 @@ summary(df)
 
 ```
 
-## Types of data: factors and logical 
+## 13. Types of data: factors and logical 
 
 There are different types of variables depending on the characteristics they represent.
 
@@ -317,7 +317,7 @@ is.factor(df$location_factor)
 head(df$jsa.fem == 55)
 ```
 
-## Data manipulation: old times 
+## 14. Data manipulation: old times 
 
 Normally we have to transform "_clean_" the raw information in order to meet other purposes. These transformations may entail adding (dropping) variables, adding (dropping) rows, select certain variables (rows)...
 
@@ -350,7 +350,7 @@ jsa.40 = subset(df, jsa.fem == 40)
 head(jsa.40)
 ```
 
-## Data manipulation now: _the "yr" family_
+## 15. Data manipulation now: _the "yr" family_
 
 "_Tidy datasets provide a standarized way to link the structure of a dataset (its physical layout) with its semantics (its meaning)_" (Hadley Wickham^[Wickham, Hadley (2014) "Tidy data". _Journal of Statistical Software Volume VV Issue II_])
 
@@ -366,7 +366,7 @@ head(jsa.40)
     - **`tidyr()`**
    
 
-## `dplyr()`
+## 15.1 `dplyr()`
 
 - It is based on the _split - apply - combine_ concept so you can carry out various operations quite efficiently. 
 
@@ -495,7 +495,7 @@ head(example6, 5)
 
 ```
 
-## `tidyr`
+## 15.2 `tidyr`
 
 - This package is very useful when you want to change "reshape" the structure of your dataset.
 
@@ -538,7 +538,7 @@ head(example7.1, 5)
 
 ```
 
-## Graphics: `ggplot2`
+## 16 Graphics: `ggplot2`
 
 - Most of the visualisation tools in R rely to more or less extent on `ggplot2`. `ggplot2` is based on the grammar of graphics, a system for describing and building the graphs.
 
@@ -591,7 +591,7 @@ example9.c
 ```
 
 
-## Dynamic documents: R Markdown
+## 17 Dynamic documents: R Markdown
 
 - **R Markdown**: Unified framework that combines code, results and prose. 
 - Why integrating code, results and prose?
@@ -682,7 +682,7 @@ library(stargazer)
 ```
 
 
-## Final notes 
+## 18 Final notes 
 
 - R is a good alternative if you are thinking about carrying out projects that entail a decent amount of data analysis.
 
