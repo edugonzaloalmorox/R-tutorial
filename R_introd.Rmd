@@ -366,7 +366,7 @@ head(jsa.40)
     - **`tidyr()`**
    
 
-## 15.1 `dplyr()`
+## 15.1. `dplyr()`
 
 - It is based on the _split - apply - combine_ concept so you can carry out various operations quite efficiently. 
 
@@ -495,7 +495,7 @@ head(example6, 5)
 
 ```
 
-## 15.2 `tidyr`
+## 15.2. `tidyr`
 
 - This package is very useful when you want to change "reshape" the structure of your dataset.
 
@@ -538,7 +538,7 @@ head(example7.1, 5)
 
 ```
 
-## 16 Graphics: `ggplot2`
+## 16. Graphics: `ggplot2`
 
 - Most of the visualisation tools in R rely to more or less extent on `ggplot2`. `ggplot2` is based on the grammar of graphics, a system for describing and building the graphs.
 
@@ -591,7 +591,7 @@ example9.c
 ```
 
 
-## 17 Dynamic documents: R Markdown
+## 17. Dynamic documents: R Markdown
 
 - **R Markdown**: Unified framework that combines code, results and prose. 
 - Why integrating code, results and prose?
@@ -682,7 +682,7 @@ library(stargazer)
 ```
 
 
-## 18 Final notes 
+## 18. Final notes 
 
 - R is a good alternative if you are thinking about carrying out projects that entail a decent amount of data analysis.
 
