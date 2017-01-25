@@ -591,7 +591,13 @@ example9.c
 ```
 
 
-## 17. Dynamic documents: R Markdown
+## 17. Regression analysis 
+
+- In some disciplines such as economics it is common to use regression models.
+
+- With `broom()` it is possible to transform the output of a regression model into a data frame. 
+
+## 18. Dynamic documents: R Markdown
 
 - **R Markdown**: Unified framework that combines code, results and prose. 
 - Why integrating code, results and prose?
