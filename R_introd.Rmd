@@ -1,11 +1,11 @@
 ---
 title: "Data management through R"
-author: "Newcaste University Business School"
-date: "4/11/2016"
+author: "Edu Gonzalo Almorox"
+date: "17/03/2017"
 output:
   slidy_presentation:
     font_adjustment: 2
-    footer: Intro to R - Edu Gonzalo Almorox 4/11/2016
+    footer: Intro to R - Edu Gonzalo Almorox 17/03/2017
     fig_width: 10
     fig_height: 8
     fig_caption: true
@@ -81,9 +81,11 @@ Project enable a better organizaation of the files and keeps a better control of
 
 - In case of doubt there are different ways to proceed: 
 
+
      + Specialised websites - e.g. [stackoverflow.com](http://stackoverflow.com/questions/tagged/r)
      + [R Mailing lists](https://www.r-project.org/mail.html)
      + `help`, `help.search()`, `??(name package/name function)`
+     + Google your query
 
 
 ## 5. Data structures 
